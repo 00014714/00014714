@@ -1,0 +1,22 @@
+extends main.pug
+
+block content
+    .blog-wrapper 
+        h1.blog_title Blog
+        .blog_infos 
+            each blog in blogs
+                .blog
+                    .blog_date
+                        h3.month #{blog.date.month} 
+                        h3.year #{blog.date.year}
+                    .blog_content(data-id=blog.id)
+                        .full-infos
+                            p.date-year #{blog.date.day} #{blog.date.month}, #{blog.date.year}
+                            p.short-title #{blog.title}  
+                        .bin 
+                            a(href=`/${blog.id}/delete` type="button").delete-btn 
+                                img(src="/static/images/trashbin.png", alt="transh bin")
+        if(blogs.length == 0)
+            h1.no-data there is no data
+
+

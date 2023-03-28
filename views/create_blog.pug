@@ -1,0 +1,36 @@
+extends main.pug
+
+block content
+    .create-blog-wrapper 
+            form(action=edit_id ? `/create_blog?edit_id=${edit_id}` : '/create_blog' method="POST" enctype="multipart/form-data") 
+                .title Welcome 
+                .subtitle Let's create your new blog 
+                .input-container.ic1
+                    input(type="text" class="input" name="title" value=title)
+                    .cut 
+                    label(for="title" class="placeholder") Blog Title
+                    if(title == '')
+                        .error Blog title is required
+                .input-container.ic2
+                    input(type="date" class="input" name="date" value=date)
+                    .cut 
+                    label(for="date" class="placeholder") Post Date
+                    if(date == '')
+                        .error Blog date is required
+                .input-container.ic2
+                    input(type="file" class="input" name="image" value=image)
+                    .cut.cut-short
+                    label(for="image" class="placeholder") Images
+                    .success Blog image is optional
+                .input-container.ic2
+                    textarea.text-content(cols="300", rows="400" class="input textarea" name="comment" data-value=comment)
+                    .cut.cut-short
+                    label(for="about-blog" class="placeholder") About Blog 
+                    button(type="text" class="submit") Add Blog
+                    if(comment == '')
+                        .error Blog comment is required
+            if(success)
+                .success-modal 
+                    .modal-content Successfully added 
+                        button.success-buttons(data-type="add") add blog 
+                        button.success-buttons(data-type="blogs") go to blogs

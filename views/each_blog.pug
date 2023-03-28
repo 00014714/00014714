@@ -1,0 +1,13 @@
+extends main.pug
+
+block content
+    .eblog-wrapper 
+        h1.eblog_title #{blog.title}
+        p.eblog_date #{blog.date.day} #{blog.date.month}, #{blog.date.year}
+        <hr/>
+        .eblog_content 
+            if blog.image
+                img(src=`/static/upload/${blog.image}`, alt="eblog_image")
+            p.text #{blog.comment}
+            a(href=`/${blog.id}/delete` type="button" class="delete") Delete
+            a(href=`/create_blog?edit_id=${blog.id}` type="button" class="rewrite") Re-write
