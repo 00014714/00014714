@@ -1,0 +1,98 @@
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;300;400;600&display=swap");
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Source Sans Pro", sans-serif;
+}
+
+.blog-wrapper {
+  width: 1100px;
+  margin: 0 auto;
+  padding: 2rem 0;
+}
+
+.blog-wrapper .blog_title {
+  text-align: center;
+  padding: 1rem 0;
+  font-size: 2.3rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.blog-wrapper .blog_infos .blog_date {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  border-bottom: 1px solid #b3aeae;
+}
+
+.blog-wrapper .blog_infos .bolg_date .month {
+  font-size: 1.5rem;
+  letter-spacing: 2px;
+  text-transform: capitalize;
+}
+
+.blog-wrapper .blog_infos .bolg_date .year {
+  font-size: 1.5rem;
+  /* border: 2px solid red; */
+  background-color: #7d7979;
+  border-radius: 2rem;
+  padding: 0.2rem 1.5rem;
+  color: #fff;
+}
+
+.blog-wrapper .blog_infos .blog_content {
+  cursor: pointer;
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* border: 1px solid red; */
+}
+
+.blog-wrapper .blog_infos .blog_content .bin {
+  width: 2rem;
+  height: 2rem;
+  /* border: red 2px solid ; */
+}
+
+.blog-wrapper .blog_infos .blog_content .bin .delete-btn {
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.blog-wrapper .blog_infos .blog_content .bin img {
+  width: 100%;
+  color: red;
+}
+
+.blog-wrapper .blog_infos .blog_content .full-infos .date-year {
+  margin: 0.5rem 0;
+  font-size: 1.3rem;
+  letter-spacing: 1.5px;
+  font-weight: 600;
+  color: #7d7979;
+  text-transform: capitalize;
+}
+
+.blog-wrapper .blog_infos .blog_content .full-infos .short-title {
+  font-size: 1.5rem;
+  letter-spacing: 2px;
+  font-weight: 500;
+  color: #000;
+}
+
+.blog-wrapper .blog_infos .blog_content:hover {
+  box-shadow: 0px 1px 10px 2px rgba(34, 60, 80, 0.2);
+  transition: all 0.2s ease-in-out;
+  width: 100%;
+}
+
+.no-data {
+  text-align: center;
+}

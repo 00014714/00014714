@@ -1,13 +1,11 @@
 const { Router } = require("express");
+const { nanoid } = require("nanoid");
 const multer = require("multer");
-const nanoid = require('nanoid')
 const fs = require("fs");
 const path = require("path");
 
 const router = new Router();
 
-
-// configuration for image upload
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, "public/upload/");
@@ -34,13 +32,43 @@ let upload = multer({
   },
   storage: storage,
 });
-
-
-// render home page
+//
 router.get("/", (req, res) => {
   res.render("home");
 });
 
+//
+router.get("/blogs", (req, res) => {
+  fs.readFile("./database/blogs.json", (err, blogs) => {
+    if (err) throw err;
+    const allBlogs = JSON.parse(blogs);
+    res.render("blogs", { blogs: allBlogs });
+  });
+});
+
+router.get("/:id/delete", (req, res) => {
+  const id = req.params.id;
+  fs.readFile("./database/blogs.json", (err, blogs) => {
+    if (err) throw err;
+    const allBlogs = JSON.parse(blogs);
+    const filteredBlogs = allBlogs.filter((blog) => blog.id != id);
+    const newBlogs = JSON.stringify(filteredBlogs);
+    const deletedBlogs = allBlogs.find((blog) => blog.id == id);
+
+    fs.writeFile("./database/blogs.json", newBlogs, (err) => {
+      if (err) throw err;
+      if (deletedBlogs?.image) {
+        fs.unlink(`public/upload/${deletedBlogs?.image}`, (err) => {
+          if (err) throw err;
+          console.log("deleted");
+        });
+      }
+      res.render("blogs", { blogs: filteredBlogs, delete: true });
+    });
+  });
+});
+
+//
 router.post("/create_blog", upload.single("image"), (req, res) => {
   const id = req.query.edit_id;
   const { title, date, comment } = req.body;
@@ -53,7 +81,7 @@ router.post("/create_blog", upload.single("image"), (req, res) => {
       const singleBlog = hasanBlogs.find((blog) => blog.id == id);
       hasanBlogs.unshift({
         ...req.body,
-        id: nanoid.nanoid(),
+        id: nanoid(),
         image: image ? image : singleBlog.image,
       });
       let newHasanBlogs;
@@ -175,5 +203,17 @@ const monthNameToNumber = (monthName) => {
   }
 };
 
+//
+router.get("/blogs/:id", (req, res) => {
+  const id = req.params.id;
+  fs.readFile("./database/blogs.json", (err, blogs) => {
+    if (err) throw err;
+    const hasanBlogs = JSON.parse(blogs);
+    const singleBlog = hasanBlogs.find((blog) => blog.id == id);
+    res.render("each_blog", {
+      blog: singleBlog,
+    });
+  });
+});
 
 module.exports = router;
