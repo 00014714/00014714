@@ -1,0 +1,25 @@
+html(lang="en")
+    head
+        title Khasan Jurakulov
+        link(rel="stylesheet", href="/static/styles/navbar_footer.css")
+        link(rel="stylesheet", href="/static/styles/home.css")
+        link(rel="stylesheet", href="/static/styles/blogs.css")
+        link(rel="stylesheet", href="/static/styles/create.css")
+        link(rel="stylesheet", href="/static/styles/each.css")
+
+    body
+        .nav
+            nav.navbar 
+                a(href="/").logo-text Khasan's Blog
+                .links 
+                    a.link(href="/") Home 
+                    a.link(href="/blogs") Blog 
+                    a.link(href="/create_blog") Add blog  
+
+        block content
+
+        footer.footer-wrapper 
+            p.footer-text 2023 khasan.com
+
+        script(src="/static/frontend/create.js") 
+        script(src="/static/frontend/blogs.js") 
